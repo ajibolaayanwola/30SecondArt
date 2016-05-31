@@ -116,6 +116,14 @@ $(document).ready(function() {
 	});
 	
 	$(".loading-indicator").html("Loading...");
+	
+	$("input[type='text'], textarea").focus(function() {
+		$("#ad-container").hide();
+	});
+	
+	$("input[type='text'], textarea").blur(function() {
+		$("#ad-container").show();
+	});
 	/*
 	$(window).scroll(function() {
 		if ($("body").pagecontainer("getActivePage").attr('id') == "gallery-page") {
