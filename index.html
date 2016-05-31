@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+        <meta http-equiv="Content-Security-Policy"/>
+        <link rel="stylesheet" href="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.css">
+        <link rel="stylesheet" type="text/css" href="css/mystyle.css" />
+        <script src="jquery-1.11.2.min.js"></script>
+        <script>
+			$(document).on("mobileinit", function() {
+				//$.mobile.autoInitializePage = false;
+				$.mobile.defaultPageTransition = "none";
+			});
+		</script>
+        <script src="jquery.mobile-1.4.5/jquery.mobile-1.4.5.min.js"></script>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/myfunctions.js"></script>
+        <title>30 Second Art</title>
+    </head>
+    <body>
+    	<div data-role="page" id="gallery-page">
+			<div data-role="header" data-position="fixed" data-tap-toggle="false">
+				<h1>Gallery</h1>
+				<button class="ui-btn ui-btn-right ui-corner-all draw-button">Draw</button>
+			</div>
+		
+			<div data-role="main" class="ui-content">
+				<div data-role="popup" id="enlarge-popup" data-overlay-theme="b">
+					<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-icon-delete ui-btn-icon-notext ui-btn-right close-button">Close</a>
+					<img src="" alt="Artwork" class="artwork" width="">
+				</div>
+				
+				<ul data-role="listview" class="posts">
+					
+				</ul>
+				
+				<p class="loading-indicator"></p>
+				<p class="no-more-posts">No more posts.</p>
+				<!--
+				<ul data-role="listview">
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+					<li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li><li>List Item</li>
+				</ul>-->
+			</div>
+		</div>
+    	
+    	<div data-role="page" id="draw-page">
+    		<div data-role="header" data-position="fixed" data-tap-toggle="false">
+    			<button class="ui-btn ui-btn-left ui-corner-all back-button">Back</button>
+				<h1 class="timer"></h1>
+				<button class="ui-btn ui-btn-right ui-corner-all finished-button">Finished</button>
+			</div>
+    		
+    		<div data-role="main" class="ui-content">
+    			<div data-role="popup" id="getready-popup" data-overlay-theme="b" data-dismissible="false">
+					<div data-role="header">
+						<h1>Get Ready!</h1>
+					</div>
+
+					<div data-role="main" class="ui-content">
+						<h2>Draw whatever you want!<br>You have 30 seconds.</h2>
+						
+						<div class="ui-grid-a">
+							<div class="ui-block-a">
+								<button class="ui-btn ui-corner-all start-button">Start</button>
+							</div>
+							<div class="ui-block-b">
+								<button class="ui-btn ui-corner-all back-button">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div data-role="popup" id="finished-popup" data-overlay-theme="b" data-dismissible="false">
+					<div data-role="header">
+						<h1>Times Up!</h1>
+					</div>
+
+					<div data-role="main" class="ui-content">
+						<p><img class="artwork" src="" alt="Artwork" width="100"></p>
+						<div class="ui-grid-b">
+							<div class="ui-block-a">
+								<button class="ui-btn ui-corner-all post-button">Post</button>
+							</div>
+							<div class="ui-block-b">
+								<button class="ui-btn ui-corner-all redraw-button">Redraw</button>
+							</div>
+							<div class="ui-block-c">
+								<button class="ui-btn ui-corner-all gallery-button">Gallery</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div data-role="popup" id="post-popup" data-overlay-theme="b" data-dismissible="false">
+					<div data-role="header">
+						<h1>Post</h1>
+						<a href="#" data-rel="back" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right ui-nodisc-icon ui-alt-icon close-button">Close</a>
+					</div>
+
+					<div data-role="main" class="ui-content">
+						<input type="text" class="name" placeholder="Your name" data-clear-btn="true" maxlength="20">
+						<p class="form-error"></p>
+						<p class="loading-indicator"></p>
+						<button class="ui-btn ui-corner-all post-button">Post</button>
+					</div>
+				</div>
+    			
+				<canvas id="my_canvas" width="0" height="0"></canvas>
+			</div>
+		</div>
+		
+		<div id="ad-container"></div>
+    </body>
+</html>
