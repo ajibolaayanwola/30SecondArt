@@ -122,7 +122,7 @@ $(document).ready(function() {
 	});
 	
 	$("input[type='text'], textarea").blur(function() {
-		$("#ad-container").show();
+		setTimeout(function(){ $("#ad-container").show(); }, 300);
 	});
 	/*
 	$(window).scroll(function() {
